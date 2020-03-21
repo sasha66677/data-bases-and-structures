@@ -2,9 +2,14 @@
     "version": "0.0.1",
     "dependencies": {
         "@types/node": "12.12.2",
-        "ts-node": "8.6.2",
-        "typescript": "3.8.3",
+        "@types/redis": "^2.8.16",
+        "cassandra-driver": "^4.4.0",
+        "handy-redis": "^1.8.0",
         "nodeplotlib": "0.6.5",
-        "prettier": "1.19.1"
+        "prettier": "1.19.1",
+        "redis": "^3.0.2",
+        "redis-promisify": "^0.1.2",
+        "ts-node": "8.6.2",
+        "typescript": "3.8.3"
     }
 }
