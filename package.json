@@ -3,6 +3,7 @@
     "dependencies": {
         "@types/node": "12.12.2",
         "@types/redis": "^2.8.16",
+        "amqp-ts": "^1.8.0",
         "cassandra-driver": "^4.4.0",
         "handy-redis": "^1.8.0",
         "nodeplotlib": "0.6.5",
