@@ -1,16 +1,32 @@
 {
-    "version": "0.0.1",
-    "dependencies": {
-        "@types/node": "12.12.2",
-        "@types/redis": "^2.8.16",
-        "amqp-ts": "^1.8.0",
-        "cassandra-driver": "^4.4.0",
-        "handy-redis": "^1.8.0",
-        "nodeplotlib": "0.6.5",
-        "prettier": "1.19.1",
-        "redis": "^3.0.2",
-        "redis-promisify": "^0.1.2",
-        "ts-node": "8.6.2",
-        "typescript": "3.8.3"
-    }
+  "version": "0.0.1",
+  "dependencies": {
+    "@types/node": "12.12.2",
+    "@types/redis": "^2.8.16",
+    "amqp-ts": "^1.8.0",
+    "cassandra-driver": "^4.4.0",
+    "handy-redis": "^1.8.0",
+    "nodeplotlib": "0.6.5",
+    "prettier": "1.19.1",
+    "redis": "^3.0.2",
+    "redis-promisify": "^0.1.2",
+    "ts-node": "8.6.2",
+    "typescript": "3.8.3"
+  },
+  "name": "data-bases-and-structures",
+  "description": "```\r npm install\r ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sasha66677/data-bases-and-structures.git"
+  },
+  "author": "Alex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sasha66677/data-bases-and-structures/issues"
+  },
+  "homepage": "https://github.com/sasha66677/data-bases-and-structures#readme"
 }
