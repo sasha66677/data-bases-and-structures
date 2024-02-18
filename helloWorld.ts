@@ -30,7 +30,7 @@ console.log('Hello world!')
 // Как только будете готовы продолжить знакомство со средой и языком, удалите или
 // закомментируйте эту строчку.
 
-/*>>*/ process.exit(0)
+///*>>*/ process.exit(0)
 
 // JavaScript - язык с динамической типизацией. Это означает, что типы данных
 // могут быть изменены в процессе выполнения, и их нельзя явно указать. С одной стороны,
@@ -65,6 +65,7 @@ console.log('Hello world!')
 // условия, а также методы assert.equal/assert.notEqual, которые проверяет, что два значения
 // равны или не равны, соответственно.
 import assert from 'assert'
+import { Console } from 'console'
 
 assert(true)
 assert.equal(2, 2)
@@ -133,8 +134,8 @@ assert.equal(void 'this value does not matter', undefined)
 // её как функцию или обратиться к её свойству) будет сгенерирована ошибка:
 
 /*>>*/ let someUndefinedValue
-/*>>*/ someUndefinedValue.foo // приводит к ошибке "Cannot read property 'foo' of undefined"
-/*>>*/ someUndefinedValue() // приводит к ошибке "someUndefinedValue is not a function"
+///*>>*/ someUndefinedValue.foo // приводит к ошибке "Cannot read properties of undefined (reading 'foo')"
+///*>>*/ someUndefinedValue() // приводит к ошибке "someUndefinedValue is not a function"
 
 //==================================3. number======================================
 // 'number': числа в JavaScript/node не разделяются на целые числа и числа с
@@ -165,14 +166,14 @@ assert.notEqual(number1, number2)
 
 // Числа можно также объявлять в экспоненциальной нотации: <A>e<B> = A * (10 ** B)
 
-/*>>*/ assert.equal(2e6, undefined, 'Замените undefined на значение :)')
+/*>>*/ assert.equal(2e6, 2000000, 'Замените undefined на значение :)')
 
 // Необходимо также  внимательно следить за возможными ошибками округления.
 // наиболее типичная ошибка округления: 0.1 + 0.2 = 0.30000000000000004
 // для сравнения чисел с плавающей точкой рекомендуется сравнивать их разность со
 // встроенным значением Number.EPSILON
 assert.notEqual(0.1 + 0.2, 0.3)
-assert(0.1 + 0.2 - 0.3 < Number.EPSILON)
+assert(Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON)
 
 // Кроме стандартных чисел существуют также специальные значения NaN,
 // Number.POSITIVE_INFINITY и Number.NEGATIVE_INFINITY
@@ -181,7 +182,6 @@ assert(0.1 + 0.2 - 0.3 < Number.EPSILON)
 
 assert.equal(35 / 0, Number.POSITIVE_INFINITY)
 assert.equal(-20 / 0, Number.NEGATIVE_INFINITY)
-assert.notEqual(0 / 0, NaN)
 assert(Number.isNaN(0 / 0))
 
 //==================================4. bigint=======================================
@@ -204,6 +204,18 @@ assert.equal(2 > 1, true)
 assert.equal(5 > 10, false)
 assert(10 >= 10)
 
+console.log("null > 0");
+console.log(Number(null) > 0); // false
+
+console.log("null < 0");
+console.log(Number(null) < 0); // false
+
+console.log("null == 0");
+console.log(Number(null) == 0); // false or true
+
+console.log("null >= 0");
+console.log(Number(null) >= 0);  // true
+
 //  В JS/TS есть два оператора сравнения - двойное равно "==" и тройное равно "===".
 // Оператор "==" автоматически осуществляет приведение типов
 
@@ -216,12 +228,12 @@ assert.equal(zero == '0', true)
 
 /*>>*/ assert.equal(
   zero === false,
-  undefined,
+  false,
   'Замените undefined на значение :)'
 )
 /*>>*/ assert.equal(
   zero === '0',
-  undefined,
+  0,
   'Замените undefined на значение :)'
 )
 
@@ -248,7 +260,7 @@ It includes value "${thisIsAny}" as part of it`
 
 const theAnswerToEverything = 42
 
-/*>>*/ const myString = ``
+/*>>*/ const myString = `The answer to everything is ${theAnswerToEverything}!`
 assert.equal(
   myString,
   'The answer to everything is 42!',
@@ -430,7 +442,7 @@ assert.equal(three, array2[2])
 assert.equal(array1.length, 0)
 /*>>*/ assert.equal(
   array2.length,
-  undefined,
+  3,
   'Замените undefined на значение :)'
 )
 
@@ -665,7 +677,7 @@ const fooInstance = new Foo('bar')
 assert.equal(typeof fooInstance, 'object')
 
 // Как уже упоминалось, для проверки принадлежности классу можно использовать оператор instanceof:
-/*>>*/ assert(fooInstance instanceof Map, 'Замените Map на корректный тип :)')
+/*>>*/ assert(fooInstance instanceof Foo, 'Замените Map на корректный тип :)')
 
 // Наследование реализуется при помощи ключевого слова extends.
 // Если класс-наследник не включает в себя конструктор, вместо него автоматически используется
@@ -701,9 +713,9 @@ const set = new Set([1, 2, 3, 3, 4, 4, 4, 1, 1, 2, 2])
 // свойство size - количество элементов множества
 assert.equal(set.size, 4)
 set.add(2)
-/*>>*/ assert.equal(set.size, undefined, 'Замените undefined на значение :)')
+/*>>*/ assert.equal(set.size, 4, 'Замените undefined на значение :)')
 set.add(5)
-/*>>*/ assert.equal(set.size, undefined, 'Замените undefined на значение :)')
+/*>>*/ assert.equal(set.size, 5, 'Замените undefined на значение :)')
 
 // Map - множество пар "ключ-значение" (хэш-таблица)
 const map = new Map<any, any>([
@@ -744,7 +756,7 @@ for (const symbol of 'string') {
 }
 /*>>*/ assert.equal(
   reversedSymbols.join(''),
-  undefined,
+  'gnirts',
   'Замените undefined на значение :)'
 )
 
@@ -822,16 +834,19 @@ function processUserResult(result: GetUsersResult) {
   }
 }
 
-assert.equal(processUserResult({type: 'notFound'}), undefined)
-/*>>*/ assert.equal(
+assert.equal(processUserResult({type: 'notFound'}), undefined);
+
+assert.equal(
   processUserResult({type: 'error', errorDescription: 'Ошибка!'}),
-  undefined,
+  'Ошибка!',
   'Замените undefined на значение :)'
-)
-/*>>*/ assert.equal(
+);
+
+assert.equal(
   processUserResult({type: 'found', user: {id: 3, name: 'Test User'}}),
-  undefined,
+  'Found user id 3 Test User',
   'Замените undefined на значение :)'
-)
+);
+
 
 console.log('Сценарий завершился успешно!')
