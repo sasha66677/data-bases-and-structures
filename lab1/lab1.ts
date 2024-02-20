@@ -1,6 +1,11 @@
-import {plot, stack} from 'nodeplotlib'
-import {DataStructureCommonInterface, timeStart, timeEnd} from './common'
-import {createArray} from './createArray'
+import { plot, stack } from 'nodeplotlib'
+import { DataStructureCommonInterface, timeStart, timeEnd } from './common'
+import { createArray } from './createArray'
+import { createLinkedList } from './createLinkedList'
+import { createBtree } from './createBtree'
+import { createSet } from './createSet'
+import { createMap } from './createMap'
+import { createObject } from './createObject'
 
 function testStructure(
   factory: (length: number) => DataStructureCommonInterface
@@ -80,13 +85,15 @@ function testStructure(
       timeMeasurements.deleteFirst.push(timeEnd())
     }
 
-    for (const key of Object.keys(
-      timeMeasurements
-    ) as (keyof typeof timeMeasurements)[]) {
+    for (const key of Object.keys(timeMeasurements) as (keyof typeof timeMeasurements)[]) {
+      if (!averageTimeMeasurements[key]) {
+        averageTimeMeasurements[key] = []; // Инициализация массива, если он не определен
+      }
       averageTimeMeasurements[key].push(
         timeMeasurements[key].reduce((x, y) => x + y) / numberOfExperiments
-      )
+      );
     }
+
   }
 
   for (const chartName of Object.keys(averageTimeMeasurements)) {
@@ -97,11 +104,33 @@ function testStructure(
           y: averageTimeMeasurements[chartName]
         }
       ],
-      {title: chartName}
+      { title: chartName }
     )
   }
 
   plot()
 }
 
-testStructure(createArray)
+let switcher = 1;
+switch (switcher) {
+  case 1:
+    testStructure(createArray);
+    break;
+  case 2:
+    testStructure(createSet);
+    break;
+  case 3:
+    testStructure(createMap);
+    break;
+  case 4:
+    testStructure(createObject);
+    break;
+  case 5:
+    testStructure(createLinkedList);
+    break;
+  case 6:
+      testStructure(createBtree);
+      break;
+  default:
+    console.log('Некорректный ввод');
+}
