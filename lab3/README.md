@@ -18,3 +18,20 @@
  - Завершить процесс одного из узлов Replica Set и убедиться, что оба приложения продолжают функционировать, возможно, с единичными ошибками чтения/записи.
  - Аналогично завершить процесс ещё одного узла и проверить работоспособность приложений.
  - Завершить процесс последнего узла и убедиться, что все операции чтения/записи приводят к ошибкам в обоих приложениях.
+
+
+ https://merrick-krg.medium.com/%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9-%D1%82%D1%83%D1%82%D0%BE%D1%80%D0%B8%D0%B0%D0%BB-mongodb-616c92de2235 :
+ 
+mkdir ./cluster/node1
+mkdir ./cluster/node2
+mkdir ./cluster/arbiter
+
+mongod --replSet myapp --dbpath /data/node1 --port 40000
+mongod --replSet myapp --dbpath /data/node2 --port 40001
+mongod --replSet myapp --dbpath /data/arbiter --port 40002
+
+mongo --port 40000
+
+rs.initiate()
+
+rs.add('localhost:40001')
