@@ -1,12 +1,12 @@
-import {Connection, Message} from 'amqp-ts'
+import { Connection, Message } from 'amqp-ts'
 
-function delay(ms) {
+function delay(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 async function main() {
   const connection = new Connection('amqp://localhost')
-  const queue = connection.declareQueue('queue', {durable: true})
+  const queue = connection.declareQueue('queue', { durable: true })
 
   queue.prefetch(1)
 

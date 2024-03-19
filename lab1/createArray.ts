@@ -1,4 +1,4 @@
-import {DataStructureCommonInterface} from './common'
+import { DataStructureCommonInterface } from './common'
 
 export function createArray(length: number): DataStructureCommonInterface {
   const array = new Array(length)

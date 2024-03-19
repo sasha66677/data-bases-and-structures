@@ -91,7 +91,7 @@ function testStructure(
       }
       averageTimeMeasurements[key].push(
         timeMeasurements[key].reduce((x, y) => x + y) / numberOfExperiments
-      );
+      )
     }
 
   }
@@ -111,26 +111,26 @@ function testStructure(
   plot()
 }
 
-let switcher = 1;
+let switcher = 1
 switch (switcher) {
   case 1:
-    testStructure(createArray);
-    break;
+    testStructure(createArray)
+    break
   case 2:
-    testStructure(createSet);
-    break;
+    testStructure(createSet)
+    break
   case 3:
-    testStructure(createMap);
-    break;
+    testStructure(createMap)
+    break
   case 4:
-    testStructure(createObject);
-    break;
+    testStructure(createObject)
+    break
   case 5:
-    testStructure(createLinkedList);
-    break;
+    testStructure(createLinkedList)
+    break
   case 6:
-      testStructure(createBtree);
-      break;
+    testStructure(createBtree)
+    break
   default:
-    console.log('Некорректный ввод');
+    console.log('Некорректный ввод')
 }
